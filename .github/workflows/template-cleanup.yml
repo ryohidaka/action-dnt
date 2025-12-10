@@ -1,0 +1,88 @@
+# GitHub Actions Workflow responsible for cleaning up the Composite Action Template repository from the template-specific files and configurations.
+# This workflow is supposed to be triggered automatically when a new template-based repository has been created.
+
+name: Template Cleanup
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  # Run a cleaning process only if the workflow is triggered by the non-"composite-action-template" repository.
+  template-cleanup:
+    name: Template Cleanup
+
+    runs-on: ubuntu-latest
+
+    if: github.event.repository.name != 'composite-action-template'
+
+    permissions:
+      contents: write
+      actions: write
+
+    steps:
+      - name: Fetch Sources
+        uses: actions/checkout@v6
+
+      - name: Get repository description
+        id: get_description
+        uses: ryohidaka/action-get-description@v0.1.1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Replace placeholders using script
+        run: |
+          # Get the repository name and author
+          NAME=$(basename $GITHUB_REPOSITORY)
+          AUTHOR_ID=$(echo $GITHUB_REPOSITORY | cut -d'/' -f1)
+
+          # Determine DISPLAY_NAME
+          if [[ "$NAME" == action-* ]]; then
+            # Remove "action-" prefix, replace "-" with space, capitalize each word
+            DISPLAY_NAME=$(echo "${NAME#action-}" | sed -E 's/-/ /g' | awk "{for(i=1;i<=NF;i++)\$i=toupper(substr(\$i,1,1)) substr(\$i,2)}1")
+            # Set NAME_SHORT by removing "action-" prefix
+            NAME_SHORT="${NAME#action-}"
+          else
+            DISPLAY_NAME="$NAME"
+            NAME_SHORT="$NAME"
+          fi
+
+          echo "NAME: $NAME"
+          echo "AUTHOR_ID: $AUTHOR_ID"
+          echo "DESCRIPTION: $DESCRIPTION"
+          echo "DISPLAY_NAME: $DISPLAY_NAME"
+          echo "NAME_SHORT: $NAME_SHORT"
+
+          # Replace placeholders in README template
+          sed -e "s/%NAME%/$NAME/g" \
+              -e "s/%AUTHOR%/$AUTHOR_ID/g" \
+              -e "s/%DESCRIPTION%/$DESCRIPTION/g" \
+              -e "s/%DISPLAY_NAME%/$DISPLAY_NAME/g" \
+              -e "s/%NAME_SHORT%/$NAME_SHORT/g" \
+              templates/README.md > README.md
+
+          # Replace placeholders in action.yml template
+          sed -e "s/%NAME%/$NAME/g" \
+              -e "s/%AUTHOR%/$AUTHOR_ID/g" \
+              -e "s/%DESCRIPTION%/$DESCRIPTION/g" \
+              -e "s/%DISPLAY_NAME%/$DISPLAY_NAME/g" \
+              -e "s/%NAME_SHORT%/$NAME_SHORT/g" \
+              templates/action.yml > action.yml
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DESCRIPTION: ${{ steps.get_description.outputs.description }}
+
+      - name: Remove Files
+        run: |
+          rm -rf templates \
+            LICENSE \
+            .github/workflows/template-cleanup.yml \
+            CHANGELOG.md \
+            .github/FUNDING.yml
+
+      - name: Commit and push changes
+        uses: ryohidaka/action-commit-push@v0.6.0
+        with:
+          commit-message: "chore: Template cleanup"
+          rebase: true
