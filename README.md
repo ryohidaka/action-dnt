@@ -1,43 +1,30 @@
-# composite-action-template
+# Dnt
 
-[![GitHub Release](https://img.shields.io/github/v/release/ryohidaka/composite-action-template)](https://github.com/ryohidaka/composite-action-template/releases/)
-[![Test Action](https://github.com/ryohidaka/composite-action-template/actions/workflows/test.yml/badge.svg)](https://github.com/ryohidaka/composite-action-template/actions/workflows/test.yml)
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![GitHub Release](https://img.shields.io/github/v/release/ryohidaka/action-dnt)](https://github.com/ryohidaka/action-dnt/releases/)
+[![Test Action](https://github.com/ryohidaka/action-dnt/actions/workflows/test.yml/badge.svg)](https://github.com/ryohidaka/action-dnt/actions/workflows/test.yml)
 
-[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/B0B6TVH92)
-
-Template to create composite-action for GitHub Actions.
+GitHub Actions to convert Deno to npm package.
 
 ## Usage
 
 ```yml
 on: [push]
 
-permissions:
-  contents: write
-
 jobs:
-  action-name:
+  dnt:
     runs-on: ubuntu-latest
     steps:
-      - uses: ryohidaka/composite-action-template@v0.4.1
-        with:
-          who-to-greet: "Mona the Octocat"
-
-      - run: echo random-number "$RANDOM_NUMBER"
-        shell: bash
-        env:
-          RANDOM_NUMBER: ${{ steps.foo.outputs.random-number }}
+      - uses: ryohidaka/action-dnt@v1
 ```
 
 ## Inputs
 
-| Input          | Description  | Required | Default |
-| -------------- | ------------ | -------- | ------- |
-| `who-to-greet` | Who to greet | ✅       | `World` |
+| Input | Description | Required | Default |
+| ----- | ----------- | -------- | ------- |
+| ``    |             | ✅       | ``      |
 
 ## Outputs
 
-| Output          | Description   | Example |
-| --------------- | ------------- | ------- |
-| `random-number` | Random number | `9999`  |
+| Output | Description | Example |
+| ------ | ----------- | ------- |
+| ``     |             | ``      |
