@@ -2,7 +2,7 @@ name: "Deno to Node Transform"
 
 author: "ryohidaka"
 
-description: "GitHub Actions to convert Deno to npm package."
+description: "GitHub Actions to convert Deno to npm package using @deno/dnt"
 
 branding:
   color: green

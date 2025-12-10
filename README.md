@@ -3,7 +3,7 @@
 [![GitHub Release](https://img.shields.io/github/v/release/ryohidaka/action-dnt)](https://github.com/ryohidaka/action-dnt/releases/)
 [![Test Action](https://github.com/ryohidaka/action-dnt/actions/workflows/test.yml/badge.svg)](https://github.com/ryohidaka/action-dnt/actions/workflows/test.yml)
 
-GitHub Actions to convert Deno to npm package.
+GitHub Actions to convert Deno to npm package using [@deno/dnt](https://github.com/denoland/dnt).
 
 ## Usage
 
