@@ -11,11 +11,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
-      - id: foo
-        uses: "./"
-        with:
-          who-to-greet: "Mona the Octocat"
-      - run: echo random-number "$RANDOM_NUMBER"
-        shell: bash
-        env:
-          RANDOM_NUMBER: ${{ steps.foo.outputs.random-number }}
+      - uses: "./"

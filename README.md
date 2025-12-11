@@ -22,9 +22,3 @@ jobs:
 | Input | Description | Required | Default |
 | ----- | ----------- | -------- | ------- |
 | ``    |             | ✅       | ``      |
-
-## Outputs
-
-| Output | Description | Example |
-| ------ | ----------- | ------- |
-| ``     |             | ``      |
