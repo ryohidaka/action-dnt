@@ -19,6 +19,7 @@ jobs:
           name: my-package
           version: 1.0.0
           entry-points: ./mod.ts
+          out-dir: ./npm
           deno-version: stable
 ```
 
@@ -29,4 +30,5 @@ jobs:
 | `name`         | NPM package name                  | ✅       |            |
 | `version`      | Version to build                  | ✅       |            |
 | `entry-points` | Entry point(s) of the Deno module |          | `./mod.ts` |
+| `out-dir`      | Directory to output               |          | `./npm`    |
 | `deno-version` | Deno version to use               |          | `stable`   |

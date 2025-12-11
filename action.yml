@@ -19,6 +19,10 @@ inputs:
     description: "Entry point(s) of the Deno module to build as npm package"
     required: false
     default: "./mod.ts"
+  out-dir:
+    description: "Directory to output the generated npm package"
+    required: false
+    default: "./npm"
   deno-version:
     description: "Deno version to use"
     required: false
@@ -45,5 +49,6 @@ runs:
         deno run -A ${{ github.action_path }}/scripts/build_npm.ts \
         ${{ inputs.name }} \
         ${{ inputs.version }} \
-        ${{ inputs.entry-points }}
+        ${{ inputs.entry-points }} \
+        ${{ inputs.out-dir }}
       shell: bash

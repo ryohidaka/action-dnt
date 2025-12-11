@@ -7,16 +7,17 @@ import { build, emptyDir } from "@deno/dnt"
  * 0: package name
  * 1: package version
  * 2: entry points (comma-separated)
+ * 3: output directory
  */
-const [pkgName, pkgVersion, rawEntryPoints] = Deno.args
+const [pkgName, pkgVersion, rawEntryPoints, outDir] = Deno.args
 
 const entryPoints = rawEntryPoints.split(",").map((e) => e.trim())
 
-await emptyDir("./npm")
+await emptyDir(outDir)
 
 await build({
   entryPoints,
-  outDir: "./npm",
+  outDir,
   shims: {
     // see JS docs for overview and more options
     deno: true,
