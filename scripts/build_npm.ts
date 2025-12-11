@@ -1,6 +1,7 @@
 // @see https://github.com/denoland/dnt
 // ex. scripts/build_npm.ts
 import { build, emptyDir } from "@deno/dnt"
+import { join, dirname } from "@std/path"
 
 /**
  * CLI arguments:
@@ -8,8 +9,9 @@ import { build, emptyDir } from "@deno/dnt"
  * 1: package version
  * 2: entry points (comma-separated)
  * 3: output directory
+ * 4: files to copy after build (comma-separated)
  */
-const [pkgName, pkgVersion, rawEntryPoints, outDir] = Deno.args
+const [pkgName, pkgVersion, rawEntryPoints, outDir, copyFiles] = Deno.args
 
 const entryPoints = rawEntryPoints.split(",").map((e) => e.trim())
 
@@ -23,7 +25,6 @@ await build({
     deno: true,
   },
   package: {
-    // package.json properties
     name: pkgName,
     version: pkgVersion,
     description: "Your package.",
@@ -37,8 +38,13 @@ await build({
     },
   },
   postBuild() {
-    // steps to run after building and before running the tests
-    Deno.copyFileSync("LICENSE", "npm/LICENSE")
-    Deno.copyFileSync("README.md", "npm/README.md")
+    if (!copyFiles) return
+
+    const files = copyFiles.split(",").map((f) => f.trim())
+    for (const file of files) {
+      const destination = join(outDir, file)
+      Deno.mkdirSync(dirname(destination), { recursive: true })
+      Deno.copyFileSync(file, destination)
+    }
   },
 })

@@ -18,4 +18,5 @@ jobs:
           version: 1.0.0
           entry-points: ./sample/mod.ts
           out-dir: ./sample/npm
+          copy-files: README.md
           deno-version: canary

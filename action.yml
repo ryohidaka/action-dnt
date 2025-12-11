@@ -23,6 +23,9 @@ inputs:
     description: "Directory to output the generated npm package"
     required: false
     default: "./npm"
+  copy-files:
+    description: "Additional files or directories to copy into the npm package"
+    required: false
   deno-version:
     description: "Deno version to use"
     required: false
@@ -50,5 +53,6 @@ runs:
         ${{ inputs.name }} \
         ${{ inputs.version }} \
         ${{ inputs.entry-points }} \
-        ${{ inputs.out-dir }}
+        ${{ inputs.out-dir }} \
+        ${{ inputs.copy-files }}
       shell: bash
