@@ -2,6 +2,12 @@
 // ex. scripts/build_npm.ts
 import { build, emptyDir } from "@deno/dnt"
 
+/**
+ * CLI arguments:
+ * 0: package name
+ */
+const [pkgName] = Deno.args
+
 await emptyDir("./npm")
 
 await build({
@@ -13,8 +19,8 @@ await build({
   },
   package: {
     // package.json properties
-    name: "your-package",
-    version: Deno.args[0],
+    name: pkgName,
+    version: "0.1.0",
     description: "Your package.",
     license: "MIT",
     repository: {

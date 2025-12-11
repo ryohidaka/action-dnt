@@ -16,6 +16,7 @@ jobs:
     steps:
       - uses: ryohidaka/action-dnt@v1
         with:
+          name: my-package
           deno-version: stable
 ```
 
@@ -23,4 +24,5 @@ jobs:
 
 | Input          | Description         | Required | Default  |
 | -------------- | ------------------- | -------- | -------- |
+| `name`         | NPM package name    | ✅       |          |
 | `deno-version` | Deno version to use |          | `stable` |
