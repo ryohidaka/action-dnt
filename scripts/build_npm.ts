@@ -10,10 +10,19 @@ import { join, dirname } from "@std/path"
  * 2: entry points (comma-separated)
  * 3: output directory
  * 4: files to copy after build (comma-separated)
+ * 5: package properties (JSON string)
  */
-const [pkgName, pkgVersion, rawEntryPoints, outDir, copyFiles] = Deno.args
+const [
+  pkgName,
+  pkgVersion,
+  rawEntryPoints,
+  outDir,
+  copyFiles,
+  rawPackageProps,
+] = Deno.args
 
 const entryPoints = rawEntryPoints.split(",").map((e) => e.trim())
+const packageProperties = JSON.parse(rawPackageProps)
 
 await emptyDir(outDir)
 
@@ -27,15 +36,7 @@ await build({
   package: {
     name: pkgName,
     version: pkgVersion,
-    description: "Your package.",
-    license: "MIT",
-    repository: {
-      type: "git",
-      url: "git+https://github.com/username/repo.git",
-    },
-    bugs: {
-      url: "https://github.com/username/repo/issues",
-    },
+    ...packageProperties,
   },
   postBuild() {
     if (!copyFiles) return

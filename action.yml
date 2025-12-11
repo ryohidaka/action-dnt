@@ -26,6 +26,10 @@ inputs:
   copy-files:
     description: "Additional files or directories to copy into the npm package"
     required: false
+  properties:
+    description: "Additional fields to merge into the generated package.json (e.g. description, license, repository, etc.)"
+    required: false
+    default: "{}"
   deno-version:
     description: "Deno version to use"
     required: false
@@ -54,5 +58,6 @@ runs:
         ${{ inputs.version }} \
         ${{ inputs.entry-points }} \
         ${{ inputs.out-dir }} \
-        ${{ inputs.copy-files }}
+        ${{ inputs.copy-files }} \
+        '${{ inputs.properties }}'
       shell: bash

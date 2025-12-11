@@ -19,4 +19,5 @@ jobs:
           entry-points: ./sample/mod.ts
           out-dir: ./sample/npm
           copy-files: README.md
+          properties: '{"description":"Your package.","license":"MIT","repository":{"type":"git","url":"git+https://github.com/username/repo.git"},"bugs":{"url":"https://github.com/username/repo/issues"}}'
           deno-version: canary

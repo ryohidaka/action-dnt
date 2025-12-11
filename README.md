@@ -21,16 +21,18 @@ jobs:
           entry-points: ./mod.ts
           out-dir: ./npm
           copy-files: "README.md,LICENSE"
+          properties: '{"description":"Your package.","license":"MIT"}'
           deno-version: stable
 ```
 
 ## Inputs
 
-| Input          | Description                             | Required | Default    |
-| -------------- | --------------------------------------- | -------- | ---------- |
-| `name`         | NPM package name                        | ✅       |            |
-| `version`      | Version to build                        | ✅       |            |
-| `entry-points` | Entry point(s) of the Deno module       |          | `./mod.ts` |
-| `out-dir`      | Directory to output                     |          | `./npm`    |
-| `copy-files`   | Additional files or directories to copy |          |            |
-| `deno-version` | Deno version to use                     |          | `stable`   |
+| Input          | Description                                                                     | Required | Default    |
+| -------------- | ------------------------------------------------------------------------------- | -------- | ---------- |
+| `name`         | NPM package name                                                                | ✅       |            |
+| `version`      | Version to build                                                                | ✅       |            |
+| `entry-points` | Entry point(s) of the Deno module                                               |          | `./mod.ts` |
+| `out-dir`      | Directory to output                                                             |          | `./npm`    |
+| `copy-files`   | Additional files or directories to copy                                         |          |            |
+| `properties`   | Additional fields of package.json (e.g. description, license, repository, etc.) |          | `{}`       |
+| `deno-version` | Deno version to use                                                             |          | `stable`   |
