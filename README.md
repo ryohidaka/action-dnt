@@ -15,10 +15,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: ryohidaka/action-dnt@v1
+        with:
+          deno-version: stable
 ```
 
 ## Inputs
 
-| Input | Description | Required | Default |
-| ----- | ----------- | -------- | ------- |
-| ``    |             | ✅       | ``      |
+| Input          | Description         | Required | Default  |
+| -------------- | ------------------- | -------- | -------- |
+| `deno-version` | Deno version to use |          | `stable` |

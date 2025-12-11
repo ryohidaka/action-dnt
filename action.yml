@@ -9,9 +9,19 @@ branding:
   icon: send
 
 inputs:
+  deno-version:
+    description: "Deno version to use"
+    required: false
+    default: "stable"
 
 runs:
   using: "composite"
   steps:
     - name: Checkout repository
       uses: actions/checkout@v4
+
+    - name: Setup Deno
+      uses: denoland/setup-deno@v2
+      with:
+        deno-version: ${{ inputs.deno-version }}
+        cache: true
