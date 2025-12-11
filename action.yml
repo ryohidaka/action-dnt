@@ -25,3 +25,7 @@ runs:
       with:
         deno-version: ${{ inputs.deno-version }}
         cache: true
+
+    - name: Add DNT
+      run: deno add jsr:@deno/dnt
+      shell: bash
