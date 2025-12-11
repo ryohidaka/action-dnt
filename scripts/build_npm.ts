@@ -5,8 +5,9 @@ import { build, emptyDir } from "@deno/dnt"
 /**
  * CLI arguments:
  * 0: package name
+ * 1: package version
  */
-const [pkgName] = Deno.args
+const [pkgName, pkgVersion] = Deno.args
 
 await emptyDir("./npm")
 
@@ -20,7 +21,7 @@ await build({
   package: {
     // package.json properties
     name: pkgName,
-    version: "0.1.0",
+    version: pkgVersion,
     description: "Your package.",
     license: "MIT",
     repository: {

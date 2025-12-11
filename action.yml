@@ -12,6 +12,9 @@ inputs:
   name:
     description: "NPM package name"
     required: true
+  version:
+    description: "Version to build"
+    required: true
   deno-version:
     description: "Deno version to use"
     required: false
@@ -36,5 +39,6 @@ runs:
     - name: Run build script
       run: |
         deno run -A ${{ github.action_path }}/scripts/build_npm.ts \
-        ${{ inputs.name }}
+        ${{ inputs.name }} \
+        ${{ inputs.version }}
       shell: bash

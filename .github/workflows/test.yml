@@ -15,4 +15,5 @@ jobs:
         uses: "./"
         with:
           name: my-package
+          version: 1.0.0
           deno-version: canary
