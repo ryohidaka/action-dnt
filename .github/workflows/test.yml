@@ -23,3 +23,44 @@ jobs:
           compiler-options: '{"target":"ES2023"}'
           config-file: ./sample/.dnt-config.json
           deno-version: canary
+
+      - name: Assert package.json values
+        run: |
+          PACKAGE_JSON="./sample/npm/package.json"
+
+          # Define expected values as key=value pairs
+          declare -A EXPECTED_VALUES=(
+            ["name"]="my-package"
+            ["version"]="1.0.0"
+            ["description"]="Your package."
+            ["license"]="MIT"
+            ["repository.type"]="git"
+          )
+
+          ERRORS=()
+
+          # Function to get nested JSON value using jq
+          get_json_value() {
+            local KEY=$1
+            # Convert dot notation to jq path: "repository.type" -> ".repository.type"
+            local JQ_PATH=".$KEY"
+            jq -r "$JQ_PATH" "$PACKAGE_JSON"
+          }
+
+          # Loop over expected values and check against package.json
+          for KEY in "${!EXPECTED_VALUES[@]}"; do
+            EXPECTED="${EXPECTED_VALUES[$KEY]}"
+            ACTUAL=$(get_json_value "$KEY")
+            if [ "$ACTUAL" != "$EXPECTED" ]; then
+              ERRORS+=("$KEY: expected '$EXPECTED', got '$ACTUAL'")
+            fi
+          done
+
+          # If there are any errors, print them and fail
+          if [ ${#ERRORS[@]} -ne 0 ]; then
+            echo "package.json validation failed:"
+            for ERR in "${ERRORS[@]}"; do
+              echo "  - $ERR"
+            done
+            exit 1
+          fi
