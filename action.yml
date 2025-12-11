@@ -30,6 +30,10 @@ inputs:
     description: "Additional fields to merge into the generated package.json (e.g. description, license, repository, etc.)"
     required: false
     default: "{}"
+  compiler-options:
+    description: "TypeScript compiler options to pass to DNT (e.g. target, lib, strict)"
+    required: false
+    default: '{"target":"ES2023","lib":["ESNext"]}'
   deno-version:
     description: "Deno version to use"
     required: false
@@ -59,5 +63,6 @@ runs:
         ${{ inputs.entry-points }} \
         ${{ inputs.out-dir }} \
         ${{ inputs.copy-files }} \
-        '${{ inputs.properties }}'
+        '${{ inputs.properties }}' \
+        '${{ inputs.compiler-options }}'
       shell: bash

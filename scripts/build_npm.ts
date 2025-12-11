@@ -11,6 +11,7 @@ import { join, dirname } from "@std/path"
  * 3: output directory
  * 4: files to copy after build (comma-separated)
  * 5: package properties (JSON string)
+ * 6: compiler options (JSON string)
  */
 const [
   pkgName,
@@ -19,10 +20,12 @@ const [
   outDir,
   copyFiles,
   rawPackageProps,
+  rawCompilerOptions,
 ] = Deno.args
 
 const entryPoints = rawEntryPoints.split(",").map((e) => e.trim())
 const packageProperties = JSON.parse(rawPackageProps)
+const compilerOptions = JSON.parse(rawCompilerOptions)
 
 await emptyDir(outDir)
 
@@ -38,6 +41,7 @@ await build({
     version: pkgVersion,
     ...packageProperties,
   },
+  compilerOptions,
   postBuild() {
     if (!copyFiles) return
 

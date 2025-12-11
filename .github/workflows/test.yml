@@ -20,4 +20,5 @@ jobs:
           out-dir: ./sample/npm
           copy-files: README.md
           properties: '{"description":"Your package.","license":"MIT","repository":{"type":"git","url":"git+https://github.com/username/repo.git"},"bugs":{"url":"https://github.com/username/repo/issues"}}'
+          compiler-options: '{"target":"ES2023","lib":["ESNext"]}'
           deno-version: canary
