@@ -18,13 +18,15 @@ jobs:
         with:
           name: my-package
           version: 1.0.0
+          entry-points: ./mod.ts
           deno-version: stable
 ```
 
 ## Inputs
 
-| Input          | Description         | Required | Default  |
-| -------------- | ------------------- | -------- | -------- |
-| `name`         | NPM package name    | ✅       |          |
-| `version`      | Version to build    | ✅       |          |
-| `deno-version` | Deno version to use |          | `stable` |
+| Input          | Description                       | Required | Default    |
+| -------------- | --------------------------------- | -------- | ---------- |
+| `name`         | NPM package name                  | ✅       |            |
+| `version`      | Version to build                  | ✅       |            |
+| `entry-points` | Entry point(s) of the Deno module |          | `./mod.ts` |
+| `deno-version` | Deno version to use               |          | `stable`   |

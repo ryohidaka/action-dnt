@@ -16,4 +16,5 @@ jobs:
         with:
           name: my-package
           version: 1.0.0
+          entry-points: ./sample/mod.ts
           deno-version: canary

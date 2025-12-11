@@ -6,13 +6,16 @@ import { build, emptyDir } from "@deno/dnt"
  * CLI arguments:
  * 0: package name
  * 1: package version
+ * 2: entry points (comma-separated)
  */
-const [pkgName, pkgVersion] = Deno.args
+const [pkgName, pkgVersion, rawEntryPoints] = Deno.args
+
+const entryPoints = rawEntryPoints.split(",").map((e) => e.trim())
 
 await emptyDir("./npm")
 
 await build({
-  entryPoints: ["./mod.ts"],
+  entryPoints,
   outDir: "./npm",
   shims: {
     // see JS docs for overview and more options
