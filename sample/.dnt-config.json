@@ -1,0 +1,12 @@
+{
+  "package": {
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/username/repo.git"
+    },
+    "bugs": { "url": "https://github.com/username/repo/issues" }
+  },
+  "compilerOptions": {
+    "lib": ["ESNext"]
+  }
+}

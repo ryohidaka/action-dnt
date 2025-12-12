@@ -19,6 +19,7 @@ jobs:
           entry-points: ./sample/mod.ts
           out-dir: ./sample/npm
           copy-files: README.md
-          properties: '{"description":"Your package.","license":"MIT","repository":{"type":"git","url":"git+https://github.com/username/repo.git"},"bugs":{"url":"https://github.com/username/repo/issues"}}'
-          compiler-options: '{"target":"ES2023","lib":["ESNext"]}'
+          properties: '{"description":"Your package.","license":"MIT"}'
+          compiler-options: '{"target":"ES2023"}'
+          config-file: ./sample/.dnt-config.json
           deno-version: canary

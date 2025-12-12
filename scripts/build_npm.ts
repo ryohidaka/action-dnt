@@ -2,6 +2,7 @@
 // ex. scripts/build_npm.ts
 import { build, emptyDir } from "@deno/dnt"
 import { join, dirname } from "@std/path"
+import { loadConfigFile } from "./load_config.ts"
 
 /**
  * CLI arguments:
@@ -12,6 +13,7 @@ import { join, dirname } from "@std/path"
  * 4: files to copy after build (comma-separated)
  * 5: package properties (JSON string)
  * 6: compiler options (JSON string)
+ * 7: optional config file path
  */
 const [
   pkgName,
@@ -21,11 +23,20 @@ const [
   copyFiles,
   rawPackageProps,
   rawCompilerOptions,
+  configFilePath,
 ] = Deno.args
 
 const entryPoints = rawEntryPoints.split(",").map((e) => e.trim())
-const packageProperties = JSON.parse(rawPackageProps)
-const compilerOptions = JSON.parse(rawCompilerOptions)
+const fileConfig = loadConfigFile(configFilePath)
+const cliPackageProps = JSON.parse(rawPackageProps)
+const cliCompilerOptions = JSON.parse(rawCompilerOptions)
+
+// Merge priority: file config > CLI input
+const packageProperties = { ...cliPackageProps, ...(fileConfig.package ?? {}) }
+const compilerOptions = {
+  ...cliCompilerOptions,
+  ...(fileConfig.compilerOptions ?? {}),
+}
 
 await emptyDir(outDir)
 
