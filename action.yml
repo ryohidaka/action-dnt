@@ -5,8 +5,8 @@ author: "ryohidaka"
 description: "GitHub Actions to convert Deno to npm package using @deno/dnt"
 
 branding:
-  color: green
-  icon: send
+  color: gray-dark
+  icon: shuffle
 
 inputs:
   name:
