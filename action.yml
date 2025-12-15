@@ -34,10 +34,6 @@ inputs:
     description: "TypeScript compiler options to pass to DNT (e.g. target, lib, strict)"
     required: false
     default: '{"target":"ES2023","lib":["ESNext"]}'
-  config-file:
-    description: "Path to dnt config file (JSON)"
-    required: false
-    default: ".dnt-config.json"
   deno-version:
     description: "Deno version to use"
     required: false
@@ -68,6 +64,5 @@ runs:
         ${{ inputs.out-dir }} \
         ${{ inputs.copy-files }} \
         '${{ inputs.properties }}' \
-        '${{ inputs.compiler-options }}' \
-        ${{ inputs.config-file }}
+        '${{ inputs.compiler-options }}'
       shell: bash
