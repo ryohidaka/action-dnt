@@ -18,7 +18,6 @@ jobs:
       - uses: ryohidaka/action-dnt@v1
         with:
           name: my-package
-          version: 1.0.0
           entry-points: ./mod.ts
           out-dir: ./npm
           copy-files: "README.md,LICENSE"
@@ -31,7 +30,6 @@ jobs:
 | Input              | Description                                                           | Required | Default    |
 | ------------------ | --------------------------------------------------------------------- | -------- | ---------- |
 | `name`             | NPM package name                                                      | ✅       |            |
-| `version`          | Version to build                                                      | ✅       |            |
 | `entry-points`     | Entry point(s) of the Deno module                                     |          | `./mod.ts` |
 | `out-dir`          | Directory to output                                                   |          | `./npm`    |
 | `copy-files`       | Additional files or directories to copy                               |          |            |

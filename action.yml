@@ -12,9 +12,6 @@ inputs:
   name:
     description: "NPM package name"
     required: true
-  version:
-    description: "Version to build"
-    required: true
   entry-points:
     description: "Entry point(s) of the Deno module to build as npm package"
     required: false
@@ -55,7 +52,6 @@ runs:
       run: |
         deno run -A ${{ github.action_path }}/scripts/build_npm.ts \
         ${{ inputs.name }} \
-        ${{ inputs.version }} \
         ${{ inputs.entry-points }} \
         ${{ inputs.out-dir }} \
         ${{ inputs.copy-files }} \

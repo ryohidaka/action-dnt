@@ -6,15 +6,13 @@ import { dirname, join } from "@std/path";
 /**
  * CLI arguments:
  * 0: package name
- * 1: package version
- * 2: entry points (comma-separated)
- * 3: output directory
- * 4: files to copy after build (comma-separated)
- * 5: compiler options (JSON string)
+ * 1: entry points (comma-separated)
+ * 2: output directory
+ * 3: files to copy after build (comma-separated)
+ * 4: compiler options (JSON string)
  */
 const [
   pkgName,
-  pkgVersion,
   rawEntryPoints,
   outDir,
   copyFiles,
@@ -35,7 +33,7 @@ await build({
   },
   package: {
     name: pkgName,
-    version: pkgVersion,
+    version: "0.1.0",
     description: "Your package.",
     license: "MIT",
     repository: {
