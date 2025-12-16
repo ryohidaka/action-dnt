@@ -3,7 +3,8 @@
 [![GitHub Release](https://img.shields.io/github/v/release/ryohidaka/action-dnt)](https://github.com/ryohidaka/action-dnt/releases/)
 [![Test Action](https://github.com/ryohidaka/action-dnt/actions/workflows/test.yml/badge.svg)](https://github.com/ryohidaka/action-dnt/actions/workflows/test.yml)
 
-GitHub Actions to convert Deno to npm package using [@deno/dnt](https://github.com/denoland/dnt).
+GitHub Actions to convert Deno to npm package using
+[@deno/dnt](https://github.com/denoland/dnt).
 
 ## Usage
 
@@ -21,20 +22,18 @@ jobs:
           entry-points: ./mod.ts
           out-dir: ./npm
           copy-files: "README.md,LICENSE"
-          properties: '{"description":"Your package.","license":"MIT"}'
           compiler-options: '{"target":"ES2023","lib":["ESNext"]}'
           deno-version: stable
 ```
 
 ## Inputs
 
-| Input              | Description                                                                     | Required | Default    |
-| ------------------ | ------------------------------------------------------------------------------- | -------- | ---------- |
-| `name`             | NPM package name                                                                | ✅       |            |
-| `version`          | Version to build                                                                | ✅       |            |
-| `entry-points`     | Entry point(s) of the Deno module                                               |          | `./mod.ts` |
-| `out-dir`          | Directory to output                                                             |          | `./npm`    |
-| `copy-files`       | Additional files or directories to copy                                         |          |            |
-| `properties`       | Additional fields of package.json (e.g. description, license, repository, etc.) |          | `{}`       |
-| `compiler-options` | TypeScript compiler options to pass to DNT (e.g. target, lib, strict)           |          | `{}`       |
-| `deno-version`     | Deno version to use                                                             |          | `stable`   |
+| Input              | Description                                                           | Required | Default    |
+| ------------------ | --------------------------------------------------------------------- | -------- | ---------- |
+| `name`             | NPM package name                                                      | ✅       |            |
+| `version`          | Version to build                                                      | ✅       |            |
+| `entry-points`     | Entry point(s) of the Deno module                                     |          | `./mod.ts` |
+| `out-dir`          | Directory to output                                                   |          | `./npm`    |
+| `copy-files`       | Additional files or directories to copy                               |          |            |
+| `compiler-options` | TypeScript compiler options to pass to DNT (e.g. target, lib, strict) |          | `{}`       |
+| `deno-version`     | Deno version to use                                                   |          | `stable`   |

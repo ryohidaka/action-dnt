@@ -1,7 +1,7 @@
 // @see https://github.com/denoland/dnt
 // ex. scripts/build_npm.ts
-import { build, emptyDir } from "@deno/dnt"
-import { join, dirname } from "@std/path"
+import { build, emptyDir } from "@deno/dnt";
+import { dirname, join } from "@std/path";
 
 /**
  * CLI arguments:
@@ -10,8 +10,7 @@ import { join, dirname } from "@std/path"
  * 2: entry points (comma-separated)
  * 3: output directory
  * 4: files to copy after build (comma-separated)
- * 5: package properties (JSON string)
- * 6: compiler options (JSON string)
+ * 5: compiler options (JSON string)
  */
 const [
   pkgName,
@@ -19,15 +18,13 @@ const [
   rawEntryPoints,
   outDir,
   copyFiles,
-  rawPackageProps,
   rawCompilerOptions,
-] = Deno.args
+] = Deno.args;
 
-const entryPoints = rawEntryPoints.split(",").map((e) => e.trim())
-const packageProperties = JSON.parse(rawPackageProps)
-const compilerOptions = JSON.parse(rawCompilerOptions)
+const entryPoints = rawEntryPoints.split(",").map((e) => e.trim());
+const compilerOptions = JSON.parse(rawCompilerOptions);
 
-await emptyDir(outDir)
+await emptyDir(outDir);
 
 await build({
   entryPoints,
@@ -39,17 +36,25 @@ await build({
   package: {
     name: pkgName,
     version: pkgVersion,
-    ...packageProperties,
+    description: "Your package.",
+    license: "MIT",
+    repository: {
+      type: "git",
+      url: "git+https://github.com/username/repo.git",
+    },
+    bugs: {
+      url: "https://github.com/username/repo/issues",
+    },
   },
   compilerOptions,
   postBuild() {
-    if (!copyFiles) return
+    if (!copyFiles) return;
 
-    const files = copyFiles.split(",").map((f) => f.trim())
+    const files = copyFiles.split(",").map((f) => f.trim());
     for (const file of files) {
-      const destination = join(outDir, file)
-      Deno.mkdirSync(dirname(destination), { recursive: true })
-      Deno.copyFileSync(file, destination)
+      const destination = join(outDir, file);
+      Deno.mkdirSync(dirname(destination), { recursive: true });
+      Deno.copyFileSync(file, destination);
     }
   },
-})
+});
