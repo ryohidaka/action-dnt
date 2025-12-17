@@ -1,4 +1,7 @@
 {
+  "tasks": {
+    "build:npm": " deno run -A build_npm.ts sample ../sample ../sample/npm"
+  },
   "imports": {
     "@deno/dnt": "jsr:@deno/dnt@^0.42.3",
     "@std/jsonc": "jsr:@std/jsonc@^1.0.2",
