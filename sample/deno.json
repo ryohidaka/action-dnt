@@ -1,6 +1,8 @@
 {
   "name": "sample",
   "version": "0.1.0",
+  "description": "Your package.",
+  "keyword": ["hoge"],
   "exports": "./mod.ts",
   "tasks": {
     "dev": "deno test --watch"
@@ -8,5 +10,15 @@
   "license": "MIT",
   "imports": {
     "@std/assert": "jsr:@std/assert@1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/username/repo.git"
+  },
+  "bugs": {
+    "url": "https://github.com/username/repo/issues"
+  },
+  "compilerOptions": {
+    "lib": ["ESNext"]
   }
 }

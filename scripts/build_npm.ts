@@ -2,7 +2,7 @@
 // ex. scripts/build_npm.ts
 import { build, emptyDir } from "@deno/dnt";
 import { dirname, join } from "@std/path";
-import { loadJSON } from "./utils/index.ts";
+import { cloneNpmCompatibleFields, loadJSON } from "./utils/index.ts";
 
 /**
  * CLI arguments:
@@ -28,6 +28,9 @@ if (!version) {
   Deno.exit(1);
 }
 
+// Extract only npm-relevant fields
+const baseProps = cloneNpmCompatibleFields(denoJson);
+
 // Determine entry points and output directory.
 const entryPoints = [join(projectDir, "mod.ts")];
 const compilerOptions = JSON.parse(rawCompilerOptions);
@@ -42,17 +45,9 @@ await build({
     deno: true,
   },
   package: {
+    ...baseProps,
     name: pkgName,
     version,
-    description: "Your package.",
-    license: "MIT",
-    repository: {
-      type: "git",
-      url: "git+https://github.com/username/repo.git",
-    },
-    bugs: {
-      url: "https://github.com/username/repo/issues",
-    },
   },
   compilerOptions,
   postBuild() {
