@@ -15,7 +15,7 @@ jobs:
   dnt:
     runs-on: ubuntu-latest
     steps:
-      - uses: ryohidaka/action-dnt@v1
+      - uses: ryohidaka/action-dnt@v0.1.0
         with:
           name: my-package
           project-dir: .
