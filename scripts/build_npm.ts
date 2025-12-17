@@ -22,6 +22,12 @@ if (!denoJson) {
 }
 console.debug(denoJson);
 
+const version = denoJson.version as string;
+if (!version) {
+  console.error("❌ 'version' is required in deno.json");
+  Deno.exit(1);
+}
+
 // Determine entry points and output directory.
 const entryPoints = [join(projectDir, "mod.ts")];
 const compilerOptions = JSON.parse(rawCompilerOptions);
@@ -37,7 +43,7 @@ await build({
   },
   package: {
     name: pkgName,
-    version: "0.1.0",
+    version,
     description: "Your package.",
     license: "MIT",
     repository: {

@@ -28,7 +28,7 @@ jobs:
           # Define expected values as key=value pairs
           declare -A EXPECTED_VALUES=(
             ["name"]="my-package"
-            ["version"]="1.0.0"
+            ["version"]="0.1.0"
             ["description"]="Your package."
             ["license"]="MIT"
             ["repository.type"]="git"
