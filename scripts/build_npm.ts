@@ -2,24 +2,28 @@
 // ex. scripts/build_npm.ts
 import { build, emptyDir } from "@deno/dnt";
 import { dirname, join } from "@std/path";
+import { loadJSON } from "./utils/index.ts";
 
 /**
  * CLI arguments:
  * 0: package name
- * 1: entry points (comma-separated)
+ * 1: project directory (contains deno.json and mod.ts)
  * 2: output directory
  * 3: files to copy after build (comma-separated)
  * 4: compiler options (JSON string)
  */
-const [
-  pkgName,
-  rawEntryPoints,
-  outDir,
-  copyFiles,
-  rawCompilerOptions,
-] = Deno.args;
+const [pkgName, projectDir, outDir, copyFiles, rawCompilerOptions] = Deno.args;
 
-const entryPoints = rawEntryPoints.split(",").map((e) => e.trim());
+// Load configuration
+const denoJson = loadJSON(projectDir);
+if (!denoJson) {
+  console.error(`❌ Config file not found in: ${projectDir}`);
+  Deno.exit(1);
+}
+console.debug(denoJson);
+
+// Determine entry points and output directory.
+const entryPoints = [join(projectDir, "mod.ts")];
 const compilerOptions = JSON.parse(rawCompilerOptions);
 
 await emptyDir(outDir);

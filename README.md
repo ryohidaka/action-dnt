@@ -18,7 +18,7 @@ jobs:
       - uses: ryohidaka/action-dnt@v1
         with:
           name: my-package
-          entry-points: ./mod.ts
+          project-dir: .
           out-dir: ./npm
           copy-files: "README.md,LICENSE"
           compiler-options: '{"target":"ES2023","lib":["ESNext"]}'
@@ -27,11 +27,11 @@ jobs:
 
 ## Inputs
 
-| Input              | Description                                                           | Required | Default    |
-| ------------------ | --------------------------------------------------------------------- | -------- | ---------- |
-| `name`             | NPM package name                                                      | ✅       |            |
-| `entry-points`     | Entry point(s) of the Deno module                                     |          | `./mod.ts` |
-| `out-dir`          | Directory to output                                                   |          | `./npm`    |
-| `copy-files`       | Additional files or directories to copy                               |          |            |
-| `compiler-options` | TypeScript compiler options to pass to DNT (e.g. target, lib, strict) |          | `{}`       |
-| `deno-version`     | Deno version to use                                                   |          | `stable`   |
+| Input              | Description                                                           | Required | Default  |
+| ------------------ | --------------------------------------------------------------------- | -------- | -------- |
+| `name`             | NPM package name                                                      | ✅       |          |
+| `project-dir`      | Project directory (contains `deno.json` and `mod.ts`)                 |          | `.`      |
+| `out-dir`          | Directory to output                                                   |          | `./npm`  |
+| `copy-files`       | Additional files or directories to copy                               |          |          |
+| `compiler-options` | TypeScript compiler options to pass to DNT (e.g. target, lib, strict) |          | `{}`     |
+| `deno-version`     | Deno version to use                                                   |          | `stable` |

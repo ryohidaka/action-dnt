@@ -12,10 +12,10 @@ inputs:
   name:
     description: "NPM package name"
     required: true
-  entry-points:
-    description: "Entry point(s) of the Deno module to build as npm package"
+  project-dir:
+    description: "Project directory (contains `deno.json` and `mod.ts`)"
     required: false
-    default: "./mod.ts"
+    default: "."
   out-dir:
     description: "Directory to output the generated npm package"
     required: false
@@ -52,7 +52,7 @@ runs:
       run: |
         deno run -A ${{ github.action_path }}/scripts/build_npm.ts \
         ${{ inputs.name }} \
-        ${{ inputs.entry-points }} \
+        ${{ inputs.project-dir }} \
         ${{ inputs.out-dir }} \
         ${{ inputs.copy-files }} \
         '${{ inputs.compiler-options }}'

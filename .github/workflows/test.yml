@@ -15,7 +15,7 @@ jobs:
         uses: "./"
         with:
           name: my-package
-          entry-points: ./sample/mod.ts
+          project-dir: ./sample
           out-dir: ./sample/npm
           copy-files: README.md
           compiler-options: '{"target":"ES2023","lib":["ESNext"]}'
