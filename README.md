@@ -21,7 +21,7 @@ jobs:
           node-version: latest
 
       - name: Run @deno/dnt
-        uses: ryohidaka/action-dnt@v0.1.0
+        uses: ryohidaka/action-dnt@v0.2.0
         with:
           name: my-package
           project-dir: .
