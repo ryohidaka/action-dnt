@@ -15,7 +15,13 @@ jobs:
   dnt:
     runs-on: ubuntu-latest
     steps:
-      - uses: ryohidaka/action-dnt@v0.1.0
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: latest
+
+      - name: Run @deno/dnt
+        uses: ryohidaka/action-dnt@v0.1.0
         with:
           name: my-package
           project-dir: .
@@ -23,6 +29,11 @@ jobs:
           copy-files: "README.md,LICENSE"
           compiler-options: '{"target":"ES2023","lib":["ESNext"]}'
           deno-version: stable
+
+      - name: Publish to npm
+        run: cd npm && npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 ```
 
 ## Inputs
